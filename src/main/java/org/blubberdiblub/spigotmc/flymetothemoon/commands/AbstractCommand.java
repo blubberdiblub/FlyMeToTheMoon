@@ -22,21 +22,13 @@ public abstract class AbstractCommand implements CommandExecutor, CommandInterfa
         this.logger = logger;
         this.pluginCommand = null;
 
-        logger.log(Level.INFO, "instantiated {0}", this);
-    }
-
-    @Override
-    protected void finalize() throws Throwable
-    {
-        logger.log(Level.INFO, "finalizing {0}", this);
-
-        super.finalize();
+        logger.log(Level.FINEST, "instantiated {0}", this);
     }
 
     @Override
     public void setPluginCommand(final @Nullable PluginCommand pluginCommand)
     {
-        logger.log(Level.INFO, "{0}.setPluginCommand({1})",
+        logger.log(Level.FINE, "{0}.setPluginCommand({1})",
                    new Object[]{AbstractCommand.class.getSimpleName(), pluginCommand});
 
         this.disable();
@@ -46,7 +38,7 @@ public abstract class AbstractCommand implements CommandExecutor, CommandInterfa
     @Override
     public void enable()
     {
-        logger.log(Level.INFO, "{0}.enable()", AbstractCommand.class.getSimpleName());
+        logger.log(Level.FINER, "{0}.enable()", AbstractCommand.class.getSimpleName());
 
         if (pluginCommand != null) {
             pluginCommand.setExecutor(this);
@@ -56,7 +48,7 @@ public abstract class AbstractCommand implements CommandExecutor, CommandInterfa
     @Override
     public void disable()
     {
-        logger.log(Level.INFO, "{0}.disable()", AbstractCommand.class.getSimpleName());
+        logger.log(Level.FINER, "{0}.disable()", AbstractCommand.class.getSimpleName());
 
         if (pluginCommand != null) {
             pluginCommand.setExecutor((CommandSender culprit, Command command, String label, String[] args) -> {

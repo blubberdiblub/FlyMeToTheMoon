@@ -21,7 +21,7 @@ public class Toggle extends AbstractSubCommand
     @Override
     public boolean execute(final CommandSender culprit, final Player victim, final String... args)
     {
-        logger.log(Level.INFO, "{0}.execute({1}, {2}, {3})",
+        logger.log(Level.FINE, "{0}.execute({1}, {2}, {3})",
                    new Object[]{Toggle.class.getSimpleName(), culprit, victim, args});
 
         final FlyingReconcilerInterface flyingReconciler = plugin.getFlyingReconciler();

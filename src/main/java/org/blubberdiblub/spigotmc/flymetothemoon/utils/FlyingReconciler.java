@@ -20,21 +20,13 @@ public class FlyingReconciler implements FlyingReconcilerInterface
         this.plugin = plugin;
         this.logger = logger;
 
-        logger.log(Level.INFO, "instantiated {0}", this);
-    }
-
-    @Override
-    protected void finalize() throws Throwable
-    {
-        logger.log(Level.INFO, "finalizing {0}", this);
-
-        super.finalize();
+        logger.log(Level.FINEST, "instantiated {0}", this);
     }
 
     @Override
     public Result changeAllowFlight(final Player player, final boolean allowFlight)
     {
-        logger.log(Level.INFO, "{0}.changeAllowFlight({1}, {2})",
+        logger.log(Level.FINE, "{0}.changeAllowFlight({1}, {2})",
                    new Object[]{FlyingReconciler.class.getSimpleName(), player, allowFlight});
 
         return this.reconcile(player, allowFlight, null, null);
@@ -44,7 +36,7 @@ public class FlyingReconciler implements FlyingReconcilerInterface
     public Result changeAllowFlight(final Player player, final boolean allowFlight, final boolean from,
                                     final boolean makeFlying)
     {
-        logger.log(Level.INFO, "{0}.changeAllowFlight({1}, {2}, {3}, {4})",
+        logger.log(Level.FINE, "{0}.changeAllowFlight({1}, {2}, {3}, {4})",
                    new Object[]{FlyingReconciler.class.getSimpleName(), player, allowFlight, from, makeFlying});
 
         return this.reconcile(player, allowFlight, from, makeFlying);

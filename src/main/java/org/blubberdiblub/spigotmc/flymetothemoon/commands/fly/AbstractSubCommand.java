@@ -25,21 +25,13 @@ public abstract class AbstractSubCommand implements SubCommandInterface
         this.plugin = plugin;
         this.logger = logger;
 
-        logger.log(Level.INFO, "instantiated {0}", this);
-    }
-
-    @Override
-    protected void finalize() throws Throwable
-    {
-        logger.log(Level.INFO, "finalizing {0}", this);
-
-        super.finalize();
+        logger.log(Level.FINEST, "instantiated {0}", this);
     }
 
     @Override
     public boolean matches(String token)
     {
-        logger.log(Level.INFO, "{0}.matches({1})", new Object[]{AbstractSubCommand.class.getSimpleName(), token});
+        logger.log(Level.FINE, "{0}.matches({1})", new Object[]{AbstractSubCommand.class.getSimpleName(), token});
 
         return commandName.equalsIgnoreCase(token);
     }

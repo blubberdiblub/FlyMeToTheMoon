@@ -24,21 +24,13 @@ public class CommandManager implements EnablerDisabler
 
         this.flyCommand = new Fly(plugin, logger);
 
-        logger.log(Level.INFO, "instantiated {0}", this);
-    }
-
-    @Override
-    protected void finalize() throws Throwable
-    {
-        logger.log(Level.INFO, "finalizing {0}", this);
-
-        super.finalize();
+        logger.log(Level.FINEST, "instantiated {0}", this);
     }
 
     @Override
     public void enable()
     {
-        logger.log(Level.INFO, "registering fly command");
+        logger.log(Level.FINER, "registering fly command");
 
         PluginCommand cmd = plugin.getCommand("fly");
         flyCommand.setPluginCommand(cmd);
@@ -48,7 +40,7 @@ public class CommandManager implements EnablerDisabler
     @Override
     public void disable()
     {
-        logger.log(Level.INFO, "unregistering fly command");
+        logger.log(Level.FINER, "unregistering fly command");
 
         flyCommand.disable();
     }

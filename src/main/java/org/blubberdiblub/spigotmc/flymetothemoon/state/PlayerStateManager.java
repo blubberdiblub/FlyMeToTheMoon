@@ -20,33 +20,25 @@ public class PlayerStateManager implements PlayerStateInterface
     public PlayerStateManager(final Logger logger) {
         this.logger = logger;
 
-        logger.log(Level.INFO, "instantiated {0}", this);
-    }
-
-    @Override
-    protected void finalize() throws Throwable
-    {
-        logger.log(Level.INFO, "finalizing {0}", this);
-
-        super.finalize();
+        logger.log(Level.FINEST, "instantiated {0}", this);
     }
 
     @Override
     public void enable()
     {
-        logger.log(Level.INFO, "{0}.enable()", PlayerStateManager.class.getSimpleName());
+        logger.log(Level.FINER, "{0}.enable()", PlayerStateManager.class.getSimpleName());
     }
 
     @Override
     public void disable()
     {
-        logger.log(Level.INFO, "{0}.disable()", PlayerStateManager.class.getSimpleName());
+        logger.log(Level.FINER, "{0}.disable()", PlayerStateManager.class.getSimpleName());
     }
 
     @Override
     public void setName(final @NotNull Player player, final @NotNull String name)
     {
-        logger.log(Level.INFO, "{0}.setName()", PlayerStateManager.class.getSimpleName());
+        logger.log(Level.FINE, "{0}.setName()", PlayerStateManager.class.getSimpleName());
 
         final UUID uuid = player.getUniqueId();
         final @Nullable PlayerState playerState = playerStates.get(uuid);
@@ -62,7 +54,7 @@ public class PlayerStateManager implements PlayerStateInterface
     @Override
     public boolean getAllowFlight(final @NotNull Player player)
     {
-        logger.log(Level.INFO, "{0}.getAllowFlight()", PlayerStateManager.class.getSimpleName());
+        logger.log(Level.FINE, "{0}.getAllowFlight()", PlayerStateManager.class.getSimpleName());
 
         final UUID uuid = player.getUniqueId();
         final @Nullable PlayerState playerState = playerStates.get(uuid);
@@ -73,7 +65,7 @@ public class PlayerStateManager implements PlayerStateInterface
     @Override
     public void setAllowFlight(final @NotNull Player player, final boolean allowFlight)
     {
-        logger.log(Level.INFO, "{0}.setAllowFlight()", PlayerStateManager.class.getSimpleName());
+        logger.log(Level.FINE, "{0}.setAllowFlight()", PlayerStateManager.class.getSimpleName());
 
         final UUID uuid = player.getUniqueId();
         final @Nullable PlayerState playerState = playerStates.get(uuid);
@@ -89,7 +81,7 @@ public class PlayerStateManager implements PlayerStateInterface
     @Override
     public boolean isFlying(final @NotNull Player player)
     {
-        logger.log(Level.INFO, "{0}.isFlying()", PlayerStateManager.class.getSimpleName());
+        logger.log(Level.FINE, "{0}.isFlying()", PlayerStateManager.class.getSimpleName());
 
         final UUID uuid = player.getUniqueId();
         final @Nullable PlayerState playerState = playerStates.get(uuid);
@@ -100,7 +92,7 @@ public class PlayerStateManager implements PlayerStateInterface
     @Override
     public void setFlying(final @NotNull Player player, final boolean isFlying)
     {
-        logger.log(Level.INFO, "{0}.setFlying()", PlayerStateManager.class.getSimpleName());
+        logger.log(Level.FINE, "{0}.setFlying()", PlayerStateManager.class.getSimpleName());
 
         final UUID uuid = player.getUniqueId();
         final @Nullable PlayerState playerState = playerStates.get(uuid);
@@ -116,7 +108,7 @@ public class PlayerStateManager implements PlayerStateInterface
     @Override
     public void setBoth(final @NotNull Player player, final boolean allowFlight, final boolean isFlying)
     {
-        logger.log(Level.INFO, "{0}.setBoth()", PlayerStateManager.class.getSimpleName());
+        logger.log(Level.FINE, "{0}.setBoth()", PlayerStateManager.class.getSimpleName());
 
         final UUID uuid = player.getUniqueId();
         final @Nullable PlayerState playerState = playerStates.get(uuid);

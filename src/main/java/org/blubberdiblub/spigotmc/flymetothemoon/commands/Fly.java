@@ -34,7 +34,7 @@ public class Fly extends AbstractCommand
     public boolean onCommand(final CommandSender culprit, final Command command, final String label,
                              final String[] args)
     {
-        logger.log(Level.INFO, "{0}.onCommand()", Fly.class.getSimpleName());
+        logger.log(Level.FINE, "{0}.onCommand()", Fly.class.getSimpleName());
 
         if (!(culprit instanceof Player)) {
             culprit.sendMessage("must be a player to use this command");

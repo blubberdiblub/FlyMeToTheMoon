@@ -24,7 +24,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-@Plugin(name = "FlyMeToTheMoon", version = "0.1")
+@Plugin(name = "FlyMeToTheMoon", version = "0.2")
 @ApiVersion(ApiVersion.Target.v1_15)
 @Author("Niels Boehm")
 @Permissions({
@@ -59,21 +59,13 @@ public class PluginEntryPoint extends JavaPlugin implements FlyMeToTheMoonPlugin
         playerListener = new PlayerListener(this, logger);
         commandManager = new CommandManager(this, logger);
 
-        logger.log(Level.INFO, "instantiated {0}", this);
-    }
-
-    @Override
-    protected void finalize() throws Throwable
-    {
-        logger.log(Level.INFO, "finalizing {0}", this);
-
-        super.finalize();
+        logger.log(Level.FINEST, "instantiated {0}", this);
     }
 
     @Override
     public void onEnable()
     {
-        logger.log(Level.INFO, "{0}.onEnable()", PluginEntryPoint.class.getSimpleName());
+        logger.log(Level.FINER, "{0}.onEnable()", PluginEntryPoint.class.getSimpleName());
 
         playerStateManager.enable();
         playerListener.enable();
@@ -83,7 +75,7 @@ public class PluginEntryPoint extends JavaPlugin implements FlyMeToTheMoonPlugin
     @Override
     public void onDisable()
     {
-        logger.log(Level.INFO, "{0}.onDisable()", PluginEntryPoint.class.getSimpleName());
+        logger.log(Level.FINER, "{0}.onDisable()", PluginEntryPoint.class.getSimpleName());
 
         commandManager.disable();
         playerListener.disable();

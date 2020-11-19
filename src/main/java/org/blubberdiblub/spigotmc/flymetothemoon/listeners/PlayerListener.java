@@ -29,21 +29,13 @@ public class PlayerListener implements EventListener
         this.plugin = plugin;
         this.logger = logger;
 
-        logger.log(Level.INFO, "instantiated {0}", this);
-    }
-
-    @Override
-    protected void finalize() throws Throwable
-    {
-        logger.log(Level.INFO, "finalizing {0}", this);
-
-        super.finalize();
+        logger.log(Level.FINEST, "instantiated {0}", this);
     }
 
     @Override
     public void enable()
     {
-        logger.log(Level.INFO, "registering PlayerManager events");
+        logger.log(Level.FINER, "registering PlayerManager events");
 
         final Server server = plugin.getServer();
         final PluginManager pm = server.getPluginManager();
@@ -53,7 +45,7 @@ public class PlayerListener implements EventListener
     @Override
     public void disable()
     {
-        logger.log(Level.INFO, "unregistering PlayerManager events");
+        logger.log(Level.FINER, "unregistering PlayerManager events");
 
         HandlerList.unregisterAll(this);
     }
@@ -67,7 +59,7 @@ public class PlayerListener implements EventListener
         final GameMode gameMode = player.getGameMode();
         final World target = player.getWorld();
 
-        logger.log(Level.INFO, "{0} {3} {4} changed from {1} to {2}",
+        logger.log(Level.FINE, "{0} {3} {4} changed from {1} to {2}",
                    new Object[]{player, source, target, allowFlight, gameMode});
     }
 
@@ -99,7 +91,7 @@ public class PlayerListener implements EventListener
         final boolean cancelled = event.isCancelled();
         final @NotNull Player player = event.getPlayer();
 
-        logger.log(Level.INFO, "{0} toggled flying to {1} and {2}", new Object[]{
+        logger.log(Level.FINE, "{0} toggled flying to {1} and {2}", new Object[]{
                 player, isFlying,
                 cancelled ? "was cancelled" : "succeeded"
         });
@@ -114,7 +106,7 @@ public class PlayerListener implements EventListener
         final @NotNull Player player = event.getPlayer();
         final @NotNull World world = player.getWorld();
 
-        logger.log(Level.INFO, "{0} left {1}", new Object[]{player, world});
+        logger.log(Level.FINE, "{0} left {1}", new Object[]{player, world});
 
         final PlayerStateInterface playerStateManager = plugin.getPlayerStateManager();
         playerStateManager.setBoth(player, player.getAllowFlight(), player.isFlying());
@@ -127,7 +119,7 @@ public class PlayerListener implements EventListener
         final GameMode gameMode = player.getGameMode();
         final World world = player.getWorld();
 
-        logger.log(Level.INFO, "{0} ({2}/{3}) {4} joined {1}",
+        logger.log(Level.FINE, "{0} ({2}/{3}) {4} joined {1}",
                    new Object[]{player, world, player.getAllowFlight(), player.isFlying(), player.getGameMode()});
 
         final PlayerStateInterface playerStateManager = plugin.getPlayerStateManager();
@@ -158,7 +150,7 @@ public class PlayerListener implements EventListener
         final GameMode source = player.getGameMode();
         final GameMode target = event.getNewGameMode();
 
-        logger.log(Level.INFO, "{0}.onPlayerGameModeChange() {1} ({2}/{3}) {4} -> {5}",
+        logger.log(Level.FINE, "{0}.onPlayerGameModeChange() {1} ({2}/{3}) {4} -> {5}",
                    new Object[]{PlayerListener.class.getSimpleName(), player, allowFlight, isFlying, source, target});
 
         this.setFlyingStateDelayed(player, allowFlight, isFlying);
@@ -173,7 +165,7 @@ public class PlayerListener implements EventListener
             public void run()
             {
                 final GameMode gameMode = player.getGameMode();
-                logger.log(Level.INFO, "{0}.run() {1} {2} {3}",
+                logger.log(Level.FINE, "{0}.run() {1} {2} {3}",
                            new Object[]{BukkitRunnable.class.getSimpleName(), player, gameMode, allowFlight});
 
                 final FlyingReconcilerInterface.Result result =
