@@ -31,8 +31,8 @@ public class Fly extends AbstractCommand
     }
 
     @Override
-    public boolean onCommand(final CommandSender culprit, final Command command, final String label,
-                             final String[] args)
+    public boolean onCommand(final @NotNull CommandSender culprit, final @NotNull Command command,
+                             final @NotNull String label, final String[] args)
     {
         logger.log(Level.FINE, "{0}.onCommand()", Fly.class.getSimpleName());
 

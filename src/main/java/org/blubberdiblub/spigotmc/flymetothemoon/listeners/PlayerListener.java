@@ -84,8 +84,8 @@ public class PlayerListener implements EventListener
         event.setCancelled(true);
     }
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onPlayerToggleFlight(final @NotNull PlayerToggleFlightEvent event)
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void debugPlayerToggleFlight(final @NotNull PlayerToggleFlightEvent event)
     {
         final boolean isFlying = event.isFlying();
         final boolean cancelled = event.isCancelled();
@@ -95,6 +95,13 @@ public class PlayerListener implements EventListener
                 player, isFlying,
                 cancelled ? "was cancelled" : "succeeded"
         });
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onPlayerToggleFlight(final @NotNull PlayerToggleFlightEvent event)
+    {
+        final boolean isFlying = event.isFlying();
+        final @NotNull Player player = event.getPlayer();
 
         final @NotNull PlayerStateInterface playerStateManager = plugin.getPlayerStateManager();
         playerStateManager.setFlying(player, isFlying);
