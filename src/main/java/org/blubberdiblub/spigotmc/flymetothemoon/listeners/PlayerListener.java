@@ -113,10 +113,10 @@ public class PlayerListener implements EventListener
         final @NotNull Player player = event.getPlayer();
         final @NotNull World world = player.getWorld();
 
-        logger.log(Level.FINE, "{0} left {1}", new Object[]{player, world});
-
         final PlayerStateInterface playerStateManager = plugin.getPlayerStateManager();
         playerStateManager.setBoth(player, player.getAllowFlight(), player.isFlying());
+
+        logger.log(Level.FINE, "{0} left {1}", new Object[]{player, world});
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -130,8 +130,9 @@ public class PlayerListener implements EventListener
                    new Object[]{player, world, player.getAllowFlight(), player.isFlying(), player.getGameMode()});
 
         final PlayerStateInterface playerStateManager = plugin.getPlayerStateManager();
-        final boolean enableFlight = player.getAllowFlight() || playerStateManager.getEnableFlight(player);
-        final boolean isFlying = player.isFlying() || playerStateManager.isFlying(player);
+        playerStateManager.setName(player, player.getName());
+        final boolean enableFlight = playerStateManager.getEnableFlight(player);
+        final boolean isFlying = playerStateManager.isFlying(player);
 
         this.setFlyingStateDelayed(player, enableFlight || isFlying, isFlying);
         if (!isFlying) {

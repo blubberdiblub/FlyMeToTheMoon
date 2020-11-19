@@ -24,7 +24,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-@Plugin(name = "FlyMeToTheMoon", version = "0.5")
+@Plugin(name = "FlyMeToTheMoon", version = "0.6")
 @ApiVersion(ApiVersion.Target.v1_15)
 @Author("Niels Boehm")
 @Permissions({
