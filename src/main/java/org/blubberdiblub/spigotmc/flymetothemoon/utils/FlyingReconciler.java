@@ -24,25 +24,25 @@ public class FlyingReconciler implements FlyingReconcilerInterface
     }
 
     @Override
-    public Result changeAllowFlight(final Player player, final boolean allowFlight)
+    public Result changeEnableFlight(final Player player, final boolean enableFlight)
     {
-        logger.log(Level.FINE, "{0}.changeAllowFlight({1}, {2})",
-                   new Object[]{FlyingReconciler.class.getSimpleName(), player, allowFlight});
+        logger.log(Level.FINE, "{0}.changeEnableFlight({1}, {2})",
+                   new Object[]{FlyingReconciler.class.getSimpleName(), player, enableFlight});
 
-        return this.reconcile(player, allowFlight, null, null);
+        return this.reconcile(player, enableFlight, null, null);
     }
 
     @Override
-    public Result changeAllowFlight(final Player player, final boolean allowFlight, final boolean from,
-                                    final boolean makeFlying)
+    public Result changeEnableFlight(final Player player, final boolean enableFlight, final boolean from,
+                                     final boolean makeFlying)
     {
-        logger.log(Level.FINE, "{0}.changeAllowFlight({1}, {2}, {3}, {4})",
-                   new Object[]{FlyingReconciler.class.getSimpleName(), player, allowFlight, from, makeFlying});
+        logger.log(Level.FINE, "{0}.changeEnableFlight({1}, {2}, {3}, {4})",
+                   new Object[]{FlyingReconciler.class.getSimpleName(), player, enableFlight, from, makeFlying});
 
-        return this.reconcile(player, allowFlight, from, makeFlying);
+        return this.reconcile(player, enableFlight, from, makeFlying);
     }
 
-    private Result reconcile(final Player player, final boolean allowFlight, final Boolean from,
+    private Result reconcile(final Player player, final boolean enableFlight, final Boolean from,
                              final Boolean makeFlying)
     {
         final @NotNull PlayerStateInterface playerStateManager = plugin.getPlayerStateManager();
@@ -51,7 +51,7 @@ public class FlyingReconciler implements FlyingReconcilerInterface
         final boolean isFlying;
 
         if (gameMode != GameMode.SPECTATOR) {
-            if (!allowFlight) {
+            if (!enableFlight) {
                 player.setAllowFlight(false);
                 playerStateManager.setBoth(player, false, false);
                 return previousAllowedFlight ? Result.DISALLOWED : Result.UNCHANGED;

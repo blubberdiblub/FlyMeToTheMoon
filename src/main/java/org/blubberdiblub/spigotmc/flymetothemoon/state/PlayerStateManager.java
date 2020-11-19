@@ -61,15 +61,15 @@ public class PlayerStateManager implements PlayerStateInterface
     }
 
     @Override
-    public boolean getAllowFlight(final @NotNull Player player)
+    public boolean getEnableFlight(final @NotNull Player player)
     {
-        logger.log(Level.FINE, "{0}.getAllowFlight()", PlayerStateManager.class.getSimpleName());
+        logger.log(Level.FINE, "{0}.getEnableFlight()", PlayerStateManager.class.getSimpleName());
 
         final UUID uuid = player.getUniqueId();
         final @Nullable PlayerState playerState = playerStates.get(uuid);
 
         if (playerState != null) {
-            return playerState.getAllowFlight();
+            return playerState.getEnableFlight();
         }
 
         if (player.getAllowFlight()) {
@@ -81,21 +81,21 @@ public class PlayerStateManager implements PlayerStateInterface
     }
 
     @Override
-    public void setAllowFlight(final @NotNull Player player, final boolean allowFlight)
+    public void setEnableFlight(final @NotNull Player player, final boolean enableFlight)
     {
-        logger.log(Level.FINE, "{0}.setAllowFlight()", PlayerStateManager.class.getSimpleName());
+        logger.log(Level.FINE, "{0}.setEnableFlight()", PlayerStateManager.class.getSimpleName());
 
         final UUID uuid = player.getUniqueId();
         final @Nullable PlayerState playerState = playerStates.get(uuid);
 
-        player.getPersistentDataContainer().set(enableFlyingKey, PersistentDataType.BYTE, (allowFlight) ? TRUE : FALSE);
+        player.getPersistentDataContainer().set(enableFlyingKey, PersistentDataType.BYTE, (enableFlight) ? TRUE : FALSE);
 
         if (playerState == null) {
-            playerStates.put(uuid, new PlayerState(player.getName(), allowFlight, player.isFlying()));
+            playerStates.put(uuid, new PlayerState(player.getName(), enableFlight, player.isFlying()));
             return;
         }
 
-        playerState.setAllowFlight(allowFlight);
+        playerState.setEnableFlight(enableFlight);
     }
 
     @Override
@@ -126,21 +126,21 @@ public class PlayerStateManager implements PlayerStateInterface
     }
 
     @Override
-    public void setBoth(final @NotNull Player player, final boolean allowFlight, final boolean isFlying)
+    public void setBoth(final @NotNull Player player, final boolean enableFlight, final boolean isFlying)
     {
         logger.log(Level.FINE, "{0}.setBoth()", PlayerStateManager.class.getSimpleName());
 
         final UUID uuid = player.getUniqueId();
         final @Nullable PlayerState playerState = playerStates.get(uuid);
 
-        player.getPersistentDataContainer().set(enableFlyingKey, PersistentDataType.BYTE, (allowFlight) ? TRUE : FALSE);
+        player.getPersistentDataContainer().set(enableFlyingKey, PersistentDataType.BYTE, (enableFlight) ? TRUE : FALSE);
 
         if (playerState == null) {
-            playerStates.put(uuid, new PlayerState(player.getName(), allowFlight, isFlying));
+            playerStates.put(uuid, new PlayerState(player.getName(), enableFlight, isFlying));
             return;
         }
 
-        playerState.setAllowFlight(allowFlight);
+        playerState.setEnableFlight(enableFlight);
         playerState.setFlying(isFlying);
     }
 }

@@ -5,8 +5,8 @@ import org.bukkit.entity.Player;
 
 public interface FlyingReconcilerInterface
 {
-    Result changeAllowFlight(Player player, final boolean allowFlight);
-    Result changeAllowFlight(Player player, final boolean allowFlight, final boolean from, final boolean makeFlying);
+    Result changeEnableFlight(Player player, final boolean enableFlight);
+    Result changeEnableFlight(Player player, final boolean enableFlight, final boolean from, final boolean makeFlying);
 
     enum Result
     {

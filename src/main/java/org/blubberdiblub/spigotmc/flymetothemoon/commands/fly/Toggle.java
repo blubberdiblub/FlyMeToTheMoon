@@ -25,7 +25,7 @@ public class Toggle extends AbstractSubCommand
                    new Object[]{Toggle.class.getSimpleName(), culprit, victim, args});
 
         final FlyingReconcilerInterface flyingReconciler = plugin.getFlyingReconciler();
-        final FlyingReconcilerInterface.Result result = flyingReconciler.changeAllowFlight(victim, !victim.getAllowFlight());
+        final FlyingReconcilerInterface.Result result = flyingReconciler.changeEnableFlight(victim, !victim.getAllowFlight());
 
         this.reportResult(culprit, victim, result);
         return true;

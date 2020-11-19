@@ -6,13 +6,13 @@ import org.jetbrains.annotations.Nullable;
 class PlayerState
 {
     private @Nullable String name;
-    private boolean allowFlight;
+    private boolean enableFlight;
     private boolean isFlying;
 
-    PlayerState(final @Nullable String name, final boolean allowFlight, final boolean isFlying)
+    PlayerState(final @Nullable String name, final boolean enableFlight, final boolean isFlying)
     {
         this.name = name;
-        this.allowFlight = allowFlight;
+        this.enableFlight = enableFlight;
         this.isFlying = isFlying;
     }
 
@@ -21,9 +21,9 @@ class PlayerState
         this.name = name;
     }
 
-    void setAllowFlight(final boolean allowFlight)
+    void setEnableFlight(final boolean enableFlight)
     {
-        this.allowFlight = allowFlight;
+        this.enableFlight = enableFlight;
     }
 
     void setFlying(final boolean isFlying)
@@ -36,9 +36,9 @@ class PlayerState
         return name;
     }
 
-    boolean getAllowFlight()
+    boolean getEnableFlight()
     {
-        return allowFlight;
+        return enableFlight;
     }
 
     boolean isFlying()

@@ -75,7 +75,7 @@ public class PlayerListener implements EventListener
 
         player.setAllowFlight(false);
         final PlayerStateInterface playerStateManager = plugin.getPlayerStateManager();
-        playerStateManager.setAllowFlight(player, false);
+        playerStateManager.setEnableFlight(player, false);
 
         if (!event.isFlying()) {
             return;
@@ -130,10 +130,10 @@ public class PlayerListener implements EventListener
                    new Object[]{player, world, player.getAllowFlight(), player.isFlying(), player.getGameMode()});
 
         final PlayerStateInterface playerStateManager = plugin.getPlayerStateManager();
-        final boolean allowFlight = player.getAllowFlight() || playerStateManager.getAllowFlight(player);
+        final boolean enableFlight = player.getAllowFlight() || playerStateManager.getEnableFlight(player);
         final boolean isFlying = player.isFlying() || playerStateManager.isFlying(player);
 
-        this.setFlyingStateDelayed(player, allowFlight || isFlying, isFlying);
+        this.setFlyingStateDelayed(player, enableFlight || isFlying, isFlying);
         if (!isFlying) {
             return;
         }
@@ -163,7 +163,7 @@ public class PlayerListener implements EventListener
         this.setFlyingStateDelayed(player, allowFlight, isFlying);
     }
 
-    private void setFlyingStateDelayed(final Player player, final boolean allowFlight, final boolean isFlying)
+    private void setFlyingStateDelayed(final Player player, final boolean enableFlight, final boolean isFlying)
     {
         final FlyingReconcilerInterface flyingReconciler = plugin.getFlyingReconciler();
         final BukkitRunnable tickDelayedGameModeSetter = new BukkitRunnable()
@@ -173,11 +173,11 @@ public class PlayerListener implements EventListener
             {
                 final GameMode gameMode = player.getGameMode();
                 logger.log(Level.FINE, "{0}.run() {1} {2} {3}",
-                           new Object[]{BukkitRunnable.class.getSimpleName(), player, gameMode, allowFlight});
+                           new Object[]{BukkitRunnable.class.getSimpleName(), player, gameMode, enableFlight});
 
                 final FlyingReconcilerInterface.Result result =
-                        flyingReconciler.changeAllowFlight(player, allowFlight || player.getAllowFlight(),
-                                                           allowFlight, isFlying || player.isFlying());
+                        flyingReconciler.changeEnableFlight(player, enableFlight || player.getAllowFlight(),
+                                                            enableFlight, isFlying || player.isFlying());
 
                 switch (result) {
                 case ERROR_NO_PERMISSION:

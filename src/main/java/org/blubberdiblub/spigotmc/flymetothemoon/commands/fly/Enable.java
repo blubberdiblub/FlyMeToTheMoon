@@ -25,7 +25,7 @@ public class Enable extends AbstractSubCommand
                    new Object[]{Enable.class.getSimpleName(), culprit, victim, args});
 
         final FlyingReconcilerInterface flyingReconciler = plugin.getFlyingReconciler();
-        final FlyingReconcilerInterface.Result result = flyingReconciler.changeAllowFlight(victim, true);
+        final FlyingReconcilerInterface.Result result = flyingReconciler.changeEnableFlight(victim, true);
 
         this.reportResult(culprit, victim, result);
         return true;
