@@ -8,7 +8,7 @@ public interface FlyingReconcilerInterface
     Result changeAllowFlight(Player player, final boolean allowFlight);
     Result changeAllowFlight(Player player, final boolean allowFlight, final boolean from, final boolean makeFlying);
 
-    public enum Result
+    enum Result
     {
         ALLOWED,
         DISALLOWED,

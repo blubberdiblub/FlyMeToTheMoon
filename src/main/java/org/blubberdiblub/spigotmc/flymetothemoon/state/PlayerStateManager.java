@@ -1,6 +1,10 @@
 package org.blubberdiblub.spigotmc.flymetothemoon.state;
 
+import org.blubberdiblub.spigotmc.flymetothemoon.FlyMeToTheMoonPlugin;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -14,11 +18,16 @@ import java.util.logging.Logger;
 public class PlayerStateManager implements PlayerStateInterface
 {
     private final Logger logger;
+    private final NamespacedKey enableFlyingKey;
 
-    private Map<UUID, PlayerState> playerStates = new HashMap<>(20);
+    private final Map<UUID, PlayerState> playerStates = new HashMap<>(20);
 
-    public PlayerStateManager(final Logger logger) {
+    private static final byte FALSE = 0;
+    private static final byte TRUE = 1;
+
+    public PlayerStateManager(final FlyMeToTheMoonPlugin plugin, final Logger logger) {
         this.logger = logger;
+        this.enableFlyingKey = new NamespacedKey(plugin, "flying.enable");
 
         logger.log(Level.FINEST, "instantiated {0}", this);
     }
@@ -59,7 +68,16 @@ public class PlayerStateManager implements PlayerStateInterface
         final UUID uuid = player.getUniqueId();
         final @Nullable PlayerState playerState = playerStates.get(uuid);
 
-        return (playerState != null) ? playerState.getAllowFlight() : player.getAllowFlight();
+        if (playerState != null) {
+            return playerState.getAllowFlight();
+        }
+
+        if (player.getAllowFlight()) {
+            return true;
+        }
+
+        final PersistentDataContainer container = player.getPersistentDataContainer();
+        return container.getOrDefault(enableFlyingKey, PersistentDataType.BYTE, FALSE) != FALSE;
     }
 
     @Override
@@ -69,6 +87,8 @@ public class PlayerStateManager implements PlayerStateInterface
 
         final UUID uuid = player.getUniqueId();
         final @Nullable PlayerState playerState = playerStates.get(uuid);
+
+        player.getPersistentDataContainer().set(enableFlyingKey, PersistentDataType.BYTE, (allowFlight) ? TRUE : FALSE);
 
         if (playerState == null) {
             playerStates.put(uuid, new PlayerState(player.getName(), allowFlight, player.isFlying()));
@@ -112,6 +132,8 @@ public class PlayerStateManager implements PlayerStateInterface
 
         final UUID uuid = player.getUniqueId();
         final @Nullable PlayerState playerState = playerStates.get(uuid);
+
+        player.getPersistentDataContainer().set(enableFlyingKey, PersistentDataType.BYTE, (allowFlight) ? TRUE : FALSE);
 
         if (playerState == null) {
             playerStates.put(uuid, new PlayerState(player.getName(), allowFlight, isFlying));

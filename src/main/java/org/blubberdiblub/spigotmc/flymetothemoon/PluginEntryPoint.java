@@ -24,7 +24,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-@Plugin(name = "FlyMeToTheMoon", version = "0.2")
+@Plugin(name = "FlyMeToTheMoon", version = "0.3")
 @ApiVersion(ApiVersion.Target.v1_15)
 @Author("Niels Boehm")
 @Permissions({
@@ -54,7 +54,7 @@ public class PluginEntryPoint extends JavaPlugin implements FlyMeToTheMoonPlugin
     {
         super();
 
-        playerStateManager = new PlayerStateManager(logger);
+        playerStateManager = new PlayerStateManager(this, logger);
         flyingReconciler = new FlyingReconciler(this, logger);
         playerListener = new PlayerListener(this, logger);
         commandManager = new CommandManager(this, logger);
