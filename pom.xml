@@ -6,7 +6,7 @@
 
   <groupId>org.blubberdiblub.spigotmc</groupId>
   <artifactId>flymetothemoon</artifactId>
-  <version>0.1</version>
+  <version>0.2</version>
   <name>FlyMeToTheMoon</name>
   <description>A Spigot plugin that provides the ability to fly independent of the game mode</description>
   <packaging>jar</packaging>
